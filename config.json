@@ -1,0 +1,7 @@
+{
+  "AccessKeyID" : "",
+  "AccessKeySecret" : "",
+  "RoleArn" : "",
+  "TokenExpireTime" : "900",
+  "PolicyFile": "policy/all_policy.txt"
+}
