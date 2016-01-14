@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'json'
 require 'aliyun/sts'
 
 CONFIG = File.expand_path('../', __FILE__) + '/config.json'
@@ -6,11 +7,11 @@ CONFIG = File.expand_path('../', __FILE__) + '/config.json'
 # A raw policy that defines the policy rules by raw json
 class RawPolicy
   def initialize(content)
-    @content = content
+    @content = JSON.load(content)
   end
 
   def serialize
-    @content
+    @content.to_json
   end
 end
 
@@ -29,6 +30,12 @@ get '/' do
 
   token = sts.assume_role(
     conf['RoleArn'], 'my-app', policy, conf['TokenExpireTime'])
+
+  headers(
+    {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Allow-METHOD' => 'GET'
+    })
 
   body(
     {
