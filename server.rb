@@ -42,7 +42,7 @@ get '/' do
       'status' => 200,
       'AccessKeyId' => token.access_key_id,
       'AccessKeySecret' => token.access_key_secret,
-      'Security' => token.security_token,
+      'SecurityToken' => token.security_token,
       'Expiration' => token.expiration
     }.to_json)
 end
